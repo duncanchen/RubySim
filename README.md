@@ -1,3 +1,3 @@
 # RubySim
 
-Discrete event simulation library 
+Discrete Event Simulation Library in Ruby
