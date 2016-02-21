@@ -18,5 +18,6 @@ module RubySim
 		def next_cue_id
 			rand(36**5).to_s(36)
 		end
+
 	end
 end
