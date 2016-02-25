@@ -1,8 +1,5 @@
 module RubySim
 
-
-
-
 	class Cue
 		attr_reader :tick
 		attr_reader :id

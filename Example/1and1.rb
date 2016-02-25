@@ -4,7 +4,7 @@ require 'rx_ruby'
 
 experiment = RubySim::Experiment.new(name:"1and1")
 
-experiment.setup(ticks:100)
+experiment.setup(ticks:200)
 
 def create_observer(tag)
 	RxRuby::Observer.create(
@@ -19,14 +19,13 @@ def create_observer(tag)
 		})
 end
 
-publisher = experiment.get_publisher
 source1 = experiment.exponential_source(10)
 source2 = experiment.uniform_source(1,3)
-publisher.subscribe(source1.cue_observer)
-publisher.subscribe(source2.cue_observer)
-experiment.associate([source1], 'path1', nil)
-experiment.associate([source2], 'path2', nil)
-publisher.connect
+service1 = experiment.exponential_service(5)
+service2 = experiment.uniform_service(2,4)
+
+experiment.associate([source1, source2], ' -x- ', [service1, service2])
+experiment.cue_publisher.connect
 
 p "I finished first!!!!"
 
