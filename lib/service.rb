@@ -10,9 +10,10 @@ module RubySim
 
 		attr_reader :mode
 		attr_reader :idle
-		attr_reader :id
+		attr_accessor :id
 		attr_reader :wip_item
 		attr_reader :leaving
+
 
 		def initialize(dist: nil, theta: nil, mu: nil, sigma: nil, min: nil, max: nil, id: nil)
 			setup_pdf(dist:dist, theta:theta, mu:mu, sigma:sigma, min:min, max:max)

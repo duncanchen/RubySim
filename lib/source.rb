@@ -10,12 +10,13 @@ module RubySim
 
 		attr_reader :check_point
 		attr_reader :leaving
-		attr_reader :id
+		attr_accessor :id
 
-		def initialize(dist: nil, theta: nil, mu: nil, sigma: nil, min: nil, max: nil)
+		def initialize(dist: nil, theta: nil, mu: nil, sigma: nil, min: nil, max: nil, id: nil)
 			setup_pdf(dist:dist, theta:theta, mu:mu, sigma:sigma, min:min, max:max)
 			@check_point = 0
 			@leaving = RxRuby::Subject.new
+			@id ||= rand(36**12).to_s(36)
 		end
 
 		def on_cue
@@ -41,7 +42,7 @@ module RubySim
 				next_check_point = @check_point + self.next
 				logger.info "fired #{tick} > #{cur_check_point}; next is #{next_check_point}"
 				@check_point = next_check_point
-				@leaving.on_next(RubySim::Cue.new(tick))
+				@leaving.on_next(RubySim::Cue.new(tick: tick, source: id))
 			end
 		end
 

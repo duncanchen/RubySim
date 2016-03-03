@@ -3,9 +3,11 @@ module RubySim
 	class Cue
 		attr_reader :tick
 		attr_reader :id
-		def initialize(tick)
+		attr_accessor :origin
+		def initialize(tick: 0, source: '')
 			@tick = tick
 			@id = self.next_cue_id
+			@origin = source
 		end
 
 		def to_s
